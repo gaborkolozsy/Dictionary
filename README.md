@@ -10,7 +10,7 @@ You can search in over 100.000 words, combination of words and example sentences
 
 ## Dictionaries
 
-* `English-Hungarian` - ***169425*** words
+* `English-Hungarian` - **169425** words
 * `Hungarian-English` - **91688** words
 * `German-Hungarian` - **129481** words
 * `Hungarian-German` - **69995** words
