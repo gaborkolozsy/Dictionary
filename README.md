@@ -1,6 +1,6 @@
 # Dictionary - Java based application
 
-![](http://gitlab.com/KolozsyGabor/Dictionary/raw/master/Dictionary/resources/images/Dictionary.png)
+![](https://gitlab.com/KolozsyGabor/Dictionary/raw/master/resources/images/Dictionary.png)
 
 ## Description
 
