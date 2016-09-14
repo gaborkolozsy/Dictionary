@@ -596,6 +596,7 @@ public class Dictionary extends JFrame {
         );
 
         pack();
+	setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
