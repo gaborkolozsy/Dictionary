@@ -131,8 +131,8 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="type something ..."/>
-            <Property name="toolTipText" type="java.lang.String" value="type ..."/>
+            <Property name="text" type="java.lang.String" value="type something.."/>
+            <Property name="toolTipText" type="java.lang.String" value="type something.."/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -213,7 +213,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="reading dictionary ..."/>
+            <Property name="text" type="java.lang.String" value="reading dictionary.."/>
             <Property name="toolTipText" type="java.lang.String" value="hit of search"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -241,7 +241,7 @@
               <Color blue="c8" green="60" red="20" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xa9; KG"/>
-            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Copyright &#xa9; 2016 Kolozsy G&#xe1;bor&lt;br&gt;&#xa;&lt;a href=&quot;http ://blank&quot;&gt;kolozsygabor@gmail.com&lt;/a&gt;"/>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Copyright &#xa9; 2016 G&#xe1;bor Kolozsy&lt;br&gt;&#xa;&lt;a href=&quot;http ://blank&quot;&gt;kolozsygabor@gmail.com&lt;/a&gt;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="sumOf">

@@ -4,9 +4,9 @@
 
 ## Description
 
-`Dictionary`is an offline dictionary. Include all combination of the following 
-3 languages. English, german and hungarian.  
-You can search in over 100.000 words, combination of words and example sentences. 
+`Dictionary`is an offline dictionary. Include all combination of the following
+3 languages. English, german and hungarian.
+You can search in over 100.000 words, combination of words and example sentences.
 
 ## Dictionaries
 
@@ -16,9 +16,3 @@ You can search in over 100.000 words, combination of words and example sentences
 * `Hungarian-German` - **69995** words
 * `English-German` - **141287** words
 * `German-English` - **193860** words
-
-
-
-
-
-

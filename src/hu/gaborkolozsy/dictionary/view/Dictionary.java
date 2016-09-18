@@ -3,11 +3,13 @@
  */
 package hu.gaborkolozsy.dictionary.view;
 
-import hu.gaborkolozsy.dictionary.controller.Reader;
-import hu.gaborkolozsy.dictionary.controller.Searcher;
-import hu.gaborkolozsy.dictionary.model.Config;
-import hu.gaborkolozsy.dictionary.model.FontType;
-import hu.gaborkolozsy.dictionary.model.Theme;
+import hu.gaborkolozsy.dictionary.controller.Config;
+import hu.gaborkolozsy.dictionary.controller.DictionaryService;
+import hu.gaborkolozsy.dictionary.controller.SearchService;
+import hu.gaborkolozsy.dictionary.controller.interfaces.Service;
+import hu.gaborkolozsy.dictionary.controller.interfaces.impl.FileServiceServiceImpl;
+import hu.gaborkolozsy.dictionary.controller.interfaces.impl.FontServiceServiceImpl;
+import hu.gaborkolozsy.dictionary.controller.interfaces.impl.ThemeServiceServiceImpl;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.EventQueue;
@@ -19,9 +21,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -33,15 +39,18 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  * Dictionary.
+ * (editing on Mac OS X and look better on it)
  * 
  * @author Kolozsy Gábor (kolozsygabor@gmail.com)
- * @version 0.1.0
+ * @version 0.1.1
  * 
- * @see hu.gaborkolozsy.dictionary.controller.Reader
- * @see hu.gaborkolozsy.dictionary.controller.Searcher
- * @see hu.gaborkolozsy.dictionary.model.Config
- * @see hu.gaborkolozsy.dictionary.model.FontType
- * @see hu.gaborkolozsy.dictionary.model.Theme
+ * @see hu.gaborkolozsy.dictionary.controller.Config
+ * @see hu.gaborkolozsy.dictionary.controller.DictionaryService
+ * @see hu.gaborkolozsy.dictionary.controller.SearchService
+ * @see hu.gaborkolozsy.dictionary.controller.interfaces.Service
+ * @see hu.gaborkolozsy.dictionary.controller.interfaces.impl.FileServiceServiceImpl
+ * @see hu.gaborkolozsy.dictionary.controller.interfaces.impl.FontServiceServiceImpl
+ * @see hu.gaborkolozsy.dictionary.controller.interfaces.impl.ThemeServiceServiceImpl
  * @see java.awt.Color
  * @see java.awt.Desktop
  * @see java.awt.EventQueue
@@ -53,9 +62,13 @@ import javax.swing.table.DefaultTableModel;
  * @see java.awt.event.MouseEvent
  * @see java.awt.event.MouseListener
  * @see java.io.IOException
+ * @see java.lang.reflect.InvocationTargetException
+ * @see java.lang.reflect.Method
  * @see java.net.URI
  * @see java.net.URISyntaxException
+ * @see java.util.List
  * @see java.util.concurrent.TimeUnit
+ * @see javax.swing.BorderFactory
  * @see javax.swing.JFrame
  * @see javax.swing.JLabel
  * @see javax.swing.JOptionPane
@@ -74,16 +87,35 @@ public class Dictionary extends JFrame {
     private static final Config config = new Config();
     
     /** {@code Reader} object. */
-    private final Reader reader = new Reader();
+    private static final DictionaryService dictionaryService = new DictionaryService();
     
-    /** {@code Searcher} object. */
-    private final Searcher searcher = new Searcher();
+    /** {@code FileServiceServiceImpl} object. */
+    private static final Service fileService = new FileServiceServiceImpl();
+    
+    /** {@code ThemeServiceServiceImpl} object. */
+    private static final Service themeService = new ThemeServiceServiceImpl();
+    
+    /** {@code FontServiceServiceImpl} object. */
+    private static final Service fontService = new FontServiceServiceImpl();
+    
+    /** {@code Search} object. */
+    private final SearchService searchService = new SearchService();
     
     /**
-     * Creates new form Dictionarys
-     * @throws java.io.IOException
+     * Creates new form Dictionarys.
+     * 
+     * @throws IOException by I/O error
+     * @throws IllegalAccessException if an application tries to reflectively create an instance ..
+     * @throws InvocationTargetException is a checked exception ..
+     * @throws NoSuchMethodException if a particular method not found
      */
-    public Dictionary() throws IOException {
+    @SuppressWarnings("LeakingThisInConstructor")
+    public Dictionary() throws IOException, 
+                               IllegalAccessException, 
+                               IllegalArgumentException, 
+                               InvocationTargetException, 
+                               NoSuchMethodException {
+        
         initComponents();
         
         // set table header
@@ -95,41 +127,35 @@ public class Dictionary extends JFrame {
                 table.getTableHeader().getDefaultRenderer();
         renderer.setHorizontalAlignment(JLabel.CENTER);
         
-        // load config
-        config.loadProperties();
-        
         // load default dictionary
-        reader.ReadFile(config.getDictionary());
+        fileService.set(config.getPropertie("Dictionary"));
+        
+        // read file
+        String fileName = (String) fileService.choose();
+        dictionaryService.ReadFile(fileName);
         
         // set table header
-        String[] languages = config.getDictionary().split("-");
-        String from = languages[0];
-        String to = languages[1];
-
-        table.getColumnModel().getColumn(0).setHeaderValue(from);
-        table.getColumnModel().getColumn(1).setHeaderValue(to);
+        String[] language = fileName.split("-");
+        
+        table.getColumnModel().getColumn(0).setHeaderValue(language[0]);
+        table.getColumnModel().getColumn(1).setHeaderValue(language[1]);
         table.getTableHeader().resizeAndRepaint();
         
-        // set themeInfo
-        Theme theme = new Theme(jScrollPane, search, table, jPanel, status, config);
-        theme.repaint();
+        // set theme
+        themeService.set(config.getPropertie("Theme"));
+        Method method = (Method) themeService.choose();
+        method.invoke(this);
         
-        // set fontInfo
-        FontType fontType = new FontType(search, table, status, config);
-        fontType.repaint();
+        // set font
+        fontService.set(config.getPropertie("Font"));
+        setFont((String) fontService.choose());
         
         // info text
-        this.sumOf.setText(String.valueOf(reader.getSize()));
+        this.sumOf.setText(String.valueOf(dictionaryService.getSize()));
         this.status.setText("dictionary read in");
         
         // search KeyListeners
         this.search.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
-
-            @Override
-            public void keyPressed(KeyEvent e) {}
-
             @Override
             public void keyReleased(KeyEvent e) {
                 String text = search.getText();
@@ -140,7 +166,7 @@ public class Dictionary extends JFrame {
                 
                 DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
                 
-                // remove irrelevante rows and values
+                // remove unnecessary rows and values
                 int rowCount = tableModel.getRowCount();
                 for (int i = rowCount - 1; i >= 0 ; i--) {
                     if (i < 10) {
@@ -151,31 +177,31 @@ public class Dictionary extends JFrame {
                     }
                 }
                 
-                String[] keys = reader.getKeyArray();
-                Object[] hits = searcher.displayedMatch(text, keys);
-                int numberOfHits = hits.length;
-                int rows = tableModel.getRowCount(); 
+                String[] keys = dictionaryService.getKeyArray();
+                searchService.setHits(text, keys);
                 
-                for (int i = 0; i < numberOfHits; i++) { 
+                List<String> hits = searchService.getHits();
+                
+                int numberOfHits = hits.size();
+                for (int i = 0; i < numberOfHits; i++) {
+                    String hit = dictionaryService.getValue(hits.get(i));
                     String from = "";
                     String to = "";
                     
                     // origin
-                    if ((!reader.getValue((String)hits[i]).contains("~") &&
-                         !reader.getValue((String)hits[i]).contains("/")) ||
-                          reader.getValue((String)hits[i]).contains("/")) {
+                    if ((!hit.contains("~") && !hit.contains("/")) ||
+                          hit.contains("/")) {
                         
-                        from = hits[i]+"";
-                        to = reader.getValue((String)hits[i]);
+                        from = hits.get(i) + "";
+                        to = hit;
                     } 
                     
                     // if contains '~' but '/' no, than cut and join to from
-                    if (reader.getValue((String)hits[i]).contains("~") &&
-                       !reader.getValue((String)hits[i]).contains("/")) {
+                    if (hit.contains("~") && !hit.contains("/")) {
                         
-                        String[] add = reader.getValue((String)hits[i]).split(":");
+                        String[] add = hit.split(":");
                         
-                        from = hits[i] + add[0].substring(1);
+                        from = hits.get(i) + add[0].substring(1);
                         to = add[1];
                         
                         if (add[1].startsWith(" ")) {
@@ -184,6 +210,7 @@ public class Dictionary extends JFrame {
                     }
                     
                     // write hits
+                    int rows = tableModel.getRowCount();
                     if (i >= rows) {
                         tableModel.addRow(new Object[] { from, to });
                     } else {
@@ -193,87 +220,110 @@ public class Dictionary extends JFrame {
                 }
                 
                 // set status text field
-                int max = searcher.maxMatch(text, keys);
+                searchService.setMaxHits(text, keys);
+                int max = searchService.getMaxHits();
                 if (max > 10) {
                     status.setText("first 10 / " + max + " words");
                 } else {
                     status.setText(max + " words");
                 }
             }
+            
+            @Override
+            public void keyTyped(KeyEvent e) {}
+
+            @Override
+            public void keyPressed(KeyEvent e) {}
         });
         
         // search ActionListener
         this.search.addActionListener((ActionEvent e) -> {
             String text = search.getText();
             
-            // dictionary
-            if (text.endsWith("#1") ||
-                text.endsWith("#2") ||
-                text.endsWith("#3") ||
-                text.endsWith("#4") ||
-                text.endsWith("#5") ||
-                text.endsWith("#6")) {
-                
-                String file = "";
-                
-                switch (text.substring(text.length() - 1)) {
-                    case "1": file = "English-Hungarian"; break;
-                    case "2": file = "Hungarian-English"; break;
-                    case "3": file = "German-Hungarian"; break;
-                    case "4": file = "Hungarian-German"; break;
-                    case "5": file = "English-German"; break;
-                    case "6": file = "German-English"; break;
-                }
-                
-                // set properties
-                config.setDictionary(file);
-                
-                // load dictionary by specified file name
-                reader.ReadFile(file);
-                
-                // set table header
-                String[] languages1 = file.split("-");
-                String from1 = languages1[0];
-                String to1 = languages1[1];
-                
-                table.getColumnModel().getColumn(0).setHeaderValue(from1);
-                table.getColumnModel().getColumn(1).setHeaderValue(to1);
-                table.getTableHeader().resizeAndRepaint();
-                
-                // displayed number of words of dictionary
-                sumOf.setText(String.valueOf(reader.getSize()));
-            } else {
-                try {
-                    String[] target;
-                    
-                    // themeInfo
+            try {
+                // dictionary
+                if (text.endsWith("#1") ||
+                    text.endsWith("#2") ||
+                    text.endsWith("#3") ||
+                    text.endsWith("#4") ||
+                    text.endsWith("#5") ||
+                    text.endsWith("#6")) {
+
+                    String dictionaryIDNumber = text.substring(text.length() - 1);
+
+                    // set dictionary
+                    fileService.set(dictionaryIDNumber);
+
+                    String dictionaryName = (String) fileService.choose();
+
+                    // set properties
+                    config.storePropertie("Dictionary", dictionaryName);
+
+                    // load dictionary by specified file name
+                    dictionaryService.ReadFile(dictionaryName);
+
+                    // set table header
+                    String[] languages = dictionaryName.split("-");
+
+                    table.getColumnModel().getColumn(0).setHeaderValue(languages[0]);
+                    table.getColumnModel().getColumn(1).setHeaderValue(languages[1]);
+                    table.getTableHeader().resizeAndRepaint();
+
+                    // displayed number of words of dictionary
+                    sumOf.setText(String.valueOf(dictionaryService.getSize()));
+
+                } else {
+                    String[] result;
+
                     if (text.endsWith(":Midnight") ||
                         text.endsWith(":Dark") ||
                         text.endsWith(":Light") ||
                         text.endsWith(":1") ||
                         text.endsWith(":2") ||
                         text.endsWith(":3")) {
-                        
-                        target = text.split("(:\\w+:|::|:)");
-                        config.setTheme(target[1]);
-                        theme.repaint();
+
+                        result = text.split("(:\\w+:|::|:)");
+
+                        // set theme
+                        themeService.set(result[1]);
+
+                        // set properties
+                        config.storePropertie("Theme", result[1]);
+
+                        // paint the theme
+                        Method meth = (Method) themeService.choose();
+                        meth.invoke(this);
+                    
                     } else {
-                        
-                        // fontInfo
+
+                        // font
                         if (text.endsWith("@HERCULANUM") ||
                             text.endsWith("@Dialog") ||
                             text.endsWith("@Comic Sans MS") ||
                             text.endsWith("@1") ||
                             text.endsWith("@2") ||
                             text.endsWith("@3")) {
-                            
-                            target = text.split("(@\\w+@|@@|@)");
-                            config.setFont(target[1]);
-                            fontType.repaint();
-                        }}
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage());
+
+                            result = text.split("(@\\w+@|@@|@)");
+
+                            // set font
+                            fontService.set(result[1]);
+
+                            // set properties
+                            config.storePropertie("Font", result[1]);
+
+                            // paint the font
+                            setFont((String) fontService.choose());
+                        }
+                    }
                 }
+            } catch (IOException |
+                     NoSuchMethodException |
+                     IllegalArgumentException | 
+                     InvocationTargetException | 
+                     IllegalAccessException ex) {
+                
+                JOptionPane.showMessageDialog(null, ex.getMessage());
             }
             
             // focus first time pass and then take back
@@ -281,7 +331,11 @@ public class Dictionary extends JFrame {
             this.search.requestFocus();
             
             // search text here enough
-            this.search.setText("type something ...");
+            this.search.setText("type something..");
+            
+            if (System.getProperty("os.name").startsWith("Win")) {
+                this.search.setText("");
+            }
         });
         
         // table MouseListener
@@ -436,8 +490,11 @@ public class Dictionary extends JFrame {
         search.setFont(new java.awt.Font("Herculanum", 0, 13)); // NOI18N
         search.setForeground(new java.awt.Color(255, 255, 255));
         search.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        search.setText("type something ...");
-        search.setToolTipText("type ...");
+        search.setText("type something..");
+        if (System.getProperty("os.name").startsWith("Win")) {
+            search.setText("");
+        }
+	search.setToolTipText("type something..");
         search.setBorder(null);
         search.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         search.setSelectedTextColor(new java.awt.Color(255, 255, 255));
@@ -483,7 +540,7 @@ public class Dictionary extends JFrame {
         status.setFont(new java.awt.Font("Herculanum", 0, 13)); // NOI18N
         status.setForeground(new java.awt.Color(255, 255, 255));
         status.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        status.setText("reading dictionary ...");
+        status.setText("reading dictionary..");
         status.setToolTipText("hit of search");
         status.setBorder(null);
         status.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
@@ -494,7 +551,7 @@ public class Dictionary extends JFrame {
         copyright.setFont(new java.awt.Font("Herculanum", 1, 12)); // NOI18N
         copyright.setForeground(new java.awt.Color(32, 96, 200));
         copyright.setText("© KG");
-        copyright.setToolTipText("<html>Copyright © 2016 Kolozsy Gábor<br>\n<a href=\"http ://blank\">kolozsygabor@gmail.com</a>");
+        copyright.setToolTipText("<html>Copyright © 2016 Gábor Kolozsy<br>\n<a href=\"http ://blank\">kolozsygabor@gmail.com</a>");
 
         sumOf.setBackground(new java.awt.Color(0, 0, 0));
         sumOf.setFont(new java.awt.Font("Herculanum", 0, 12)); // NOI18N
@@ -600,6 +657,94 @@ public class Dictionary extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
+     * Midnight theme.
+     */
+    private void midnight() {
+        search.setBorder(BorderFactory
+                .createLineBorder(Color.black));
+        search.setBackground(Color.black);
+        search.setForeground(Color.white);
+        jPanel.setBackground(Color.black);
+        jScrollPane.setBorder(BorderFactory
+                .createLineBorder(Color.black));
+        table.getTableHeader().setBorder(BorderFactory
+                .createLineBorder(Color.black));
+        table.getTableHeader()
+                .setBackground(Color.black);
+        table.setBackground(Color.black);
+        table.setForeground(Color.white);
+        table.setGridColor(Color.black);
+        table.setSelectionBackground(Color.black);
+        table.setSelectionForeground(Color.white);
+        status.setBorder(BorderFactory
+                .createLineBorder(Color.black));
+        status.setBackground(Color.black);
+        status.setForeground(Color.white);
+    }
+    
+    /**
+     * Dark theme.
+     */
+    private void dark() {
+        search.setBorder(BorderFactory
+                .createLineBorder(new Color(32, 96, 200)));
+        search.setBackground(Color.black);
+        search.setForeground(Color.white);
+        jPanel.setBackground(Color.black);
+        jScrollPane.setBorder(BorderFactory
+                .createLineBorder(Color.black));
+        table.getTableHeader().setBorder(BorderFactory
+                .createLineBorder(new Color(32, 96, 200)));
+        table.getTableHeader()
+                .setBackground(Color.black);
+        table.setBackground(Color.black);
+        table.setForeground(Color.white);
+        table.setGridColor(new Color(25, 25, 25));
+        table.setSelectionBackground(Color.black);
+        table.setSelectionForeground(Color.white);
+        status.setBorder(BorderFactory
+                .createLineBorder(new Color(32, 96, 200)));
+        status.setBackground(Color.black);
+        status.setForeground(Color.white);
+    }
+    
+    /**
+     * Light theme.
+     */
+    private void light() {
+        search.setBorder(BorderFactory
+                .createLineBorder(new Color(255, 249, 236)));
+        search.setBackground(new Color(255, 249, 236));
+        search.setForeground(Color.black);
+        jPanel.setBackground(new Color(255, 249, 236));
+        jScrollPane.setBorder(BorderFactory
+                .createLineBorder(Color.lightGray));
+        table.getTableHeader().setBorder(BorderFactory
+                .createLineBorder(Color.lightGray));
+        table.getTableHeader()
+                .setBackground(new Color(255, 249, 236));
+        table.setBackground(new Color(255, 249, 236));
+        table.setForeground(Color.black);
+        table.setGridColor(Color.lightGray);
+        table.setSelectionBackground(new Color(255, 249, 236));
+        table.setSelectionForeground(Color.black);
+        status.setBorder(BorderFactory
+                .createLineBorder(new Color(255, 249, 236)));
+        status.setBackground(new Color(255, 249, 236));
+        status.setForeground(Color.black);
+    }
+    
+    /**
+     * Set the font.
+     * @param fontType the actual font type
+     */
+    private void setFont(String fontType) {
+        search.setFont(new Font(fontType, 0, 13));
+        table.setFont(new Font(fontType, 0, 12));
+        status.setFont(new Font(fontType, 0, 13));
+    }
+    
+    /**
      * Launch default browser with the specified url.
      * @param url target url
      */
@@ -638,9 +783,8 @@ public class Dictionary extends JFrame {
     
     /**
      * @param args the command line arguments
-     * @throws java.io.IOException
      */
-    public static void main(String args[]) throws IOException {
+    public static void main(String args[]) {
         /*
          * Set the Mac OS X / Windows or Nimbus look and feel
          */
@@ -674,19 +818,15 @@ public class Dictionary extends JFrame {
         EventQueue.invokeLater(() -> {
             try {
                 new Dictionary().setVisible(true);
-            } catch (IOException ex) {
+            } catch (IOException | 
+                     IllegalAccessException | 
+                     IllegalArgumentException | 
+                     InvocationTargetException | 
+                     NoSuchMethodException ex) {
+                
                 JOptionPane.showMessageDialog(null, ex.getMessage());
             }
         });
-        
-        // by exit
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            try {
-                config.storeProperties();
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage());
-            }
-        }));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
