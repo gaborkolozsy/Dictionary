@@ -5,7 +5,7 @@
 ## Description
 
 `Dictionary`is an offline dictionary. Include all combination of the following
-3 languages. English, german and hungarian.
+3 languages: english, german and hungarian.  
 You can search in over 100.000 words, combination of words and example sentences.
 
 ## Dictionaries
