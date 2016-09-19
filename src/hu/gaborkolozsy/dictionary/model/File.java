@@ -16,7 +16,7 @@ public class File {
     
     /**
      * Return file.
-     * @return the actual file
+     * @return the actual dictionary's file name or ID number
      */
     public String getFile() {
         return file;
@@ -24,7 +24,7 @@ public class File {
 
     /**
      * Set file.
-     * @param file the actual file
+     * @param file the actual dictionary's file name or ID number
      */
     public void setFile(String file) {
         this.file = file;

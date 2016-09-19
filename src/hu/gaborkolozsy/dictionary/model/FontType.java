@@ -16,7 +16,7 @@ public class FontType {
 
     /**
      * Return font.
-     * @return the actual font type
+     * @return the actual font type's name or ID number
      */
     public String getFont() {
         return font;
@@ -24,7 +24,7 @@ public class FontType {
 
     /**
      * Set font.
-     * @param font the actual font type
+     * @param font the actual font type's name or ID number
      */
     public void setFont(String font) {
         this.font = font;

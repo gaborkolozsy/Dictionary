@@ -26,7 +26,7 @@ public class ThemeServiceServiceImpl implements Service<Method> {
     
     /**
      * Return theme.
-     * @return the actual theme
+     * @return the actual theme's name or ID number
      */
     @Override
     public String get() {
@@ -35,7 +35,7 @@ public class ThemeServiceServiceImpl implements Service<Method> {
     
     /**
      * Set theme.
-     * @param theme the actual theme
+     * @param theme the actual theme's name or ID number
      */
     @Override
     public void set(String theme) {

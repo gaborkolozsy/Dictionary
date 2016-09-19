@@ -22,7 +22,7 @@ public class FontServiceServiceImpl implements Service<String> {
     
     /**
      * Return font.
-     * @return the actual font type
+     * @return the actual font type's name or ID number
      */
     @Override
     public String get() {
@@ -31,7 +31,7 @@ public class FontServiceServiceImpl implements Service<String> {
     
     /**
      * Set font.
-     * @param font the actual font type
+     * @param font the actual font type's name or ID number
      */
     @Override
     public void set(String font) {

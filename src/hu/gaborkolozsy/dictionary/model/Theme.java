@@ -16,7 +16,7 @@ public class Theme {
     
     /**
      * Return the theme.
-     * @return the actual theme
+     * @return the actual theme's name or ID number
      */
     public String getTheme() {
         return theme;
@@ -24,7 +24,7 @@ public class Theme {
 
     /**
      * Set the theme.
-     * @param theme the actual theme
+     * @param theme the actual theme's name or ID number
      */
     public void setTheme(String theme) {
         this.theme = theme;
