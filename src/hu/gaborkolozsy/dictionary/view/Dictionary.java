@@ -478,6 +478,7 @@ public class Dictionary extends JFrame {
         setTitle(name + "'s Dictionary");
         setAlwaysOnTop(true);
         setBounds(new java.awt.Rectangle(0, 22, 500, 240));
+        setMaximumSize(new java.awt.Dimension(500, 240));
         setMinimumSize(new java.awt.Dimension(500, 240));
         setResizable(false);
         setSize(new java.awt.Dimension(500, 240));
@@ -493,8 +494,8 @@ public class Dictionary extends JFrame {
         search.setText("type something..");
         
 	if (System.getProperty("os.name").startsWith("Win")) {
-            this.search.setText("");
-        }
+           this.search.setText("");
+        }	
 
 	search.setToolTipText("type something..");
         search.setBorder(null);
@@ -655,7 +656,7 @@ public class Dictionary extends JFrame {
         );
 
         pack();
-	setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
