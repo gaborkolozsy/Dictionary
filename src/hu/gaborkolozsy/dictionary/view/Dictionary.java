@@ -492,12 +492,12 @@ public class Dictionary extends JFrame {
         search.setForeground(new java.awt.Color(255, 255, 255));
         search.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         search.setText("type something..");
-        
+
 	if (System.getProperty("os.name").startsWith("Win")) {
            this.search.setText("");
-        }	
+        }
 
-	search.setToolTipText("type something..");
+        search.setToolTipText("type something..");
         search.setBorder(null);
         search.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         search.setSelectedTextColor(new java.awt.Color(255, 255, 255));
