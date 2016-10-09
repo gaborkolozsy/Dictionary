@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Dictionary box.
+ * DictionaryBox box.
  * 
  * @author Kolozsy Gábor (kolozsygabor@gmail.com)
  * 
@@ -17,13 +17,10 @@ import java.util.Set;
  * @see java.util.Set
  * @since 0.1.0
  */
-public class Dictionary {
+public class DictionaryBox {
 
-    /** Dictionary map. */
+    /** DictionaryBox map. */
     private final Map<String, String> dictionary = new HashMap<>();
-    
-    /** Key array. */
-    private String[] keyArray;
     
     /**
      * Put the key-value paar in the dictionary.
@@ -34,23 +31,6 @@ public class Dictionary {
         dictionary.put(key, value);
     }
 
-    /**
-     * Return the value by specified key.
-     * @param key the specified key
-     * @return value
-     */
-    public String getValue(String key) {
-        return dictionary.get(key);
-    }
-    
-    /**
-     * Return the size of {@code dictionary} data member.
-     * @return {@code dictionary} size
-     */
-    public int getSize() {
-        return dictionary.size();
-    }
-    
     /**
      * Return true if dictionary is empty.
      * @return <b>true</b> if dictionary is empty <b>false</b> otherwise
@@ -75,18 +55,19 @@ public class Dictionary {
     }
     
     /**
-     * Return the {@code keyArray} data member.
-     * @return key array
+     * Return the value by specified key.
+     * @param key the specified key
+     * @return value
      */
-    public String[] getKeyArray() {
-        return keyArray;
+    public String getValue(String key) {
+        return dictionary.get(key);
     }
     
     /**
-     * Set the key array.
-     * @param keyArray the key array
+     * Return the size of {@code dictionary} data member.
+     * @return {@code dictionary} size
      */
-    public void setKeyArray(String[] keyArray) {
-        this.keyArray = keyArray;
+    public int getSize() {
+        return dictionary.size();
     }
 }

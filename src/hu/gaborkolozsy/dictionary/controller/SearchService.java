@@ -3,7 +3,8 @@
  */
 package hu.gaborkolozsy.dictionary.controller;
 
-import hu.gaborkolozsy.dictionary.model.Search;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -11,90 +12,83 @@ import java.util.List;
  * 
  * @author Kolozsy Gábor (kolozsygabor@gmail.com)
  * 
- * @see hu.gaborkolozsy.dictionary.model.Search
+ * @see java.util.ArrayList
+ * @see java.util.Arrays
  * @see java.util.List
  * @since 0.1.1
  */
 public class SearchService {
     
-    /** {@ Search} object. */
-    private final Search search = new Search();
+    /** The first hit index. */
+    private int hitsFirstIdx;
+    
+    /** The last hit index. */
+    private int hitsLastIdx;
     
     /** Maximum displayed hits. */
-    private final int FIRSTTENDISPLAYEDHIT = 10;
-    
+    private final int FIRST_TEN_DISPLAYED_HIT = 10;
+
     /**
-     * Return the list of hits.
-     * @return hits list
+     * Constructor.
      */
-    public List<String> getHits() {
-        return search.getHits();
+    public SearchService() {
+        this.hitsFirstIdx = 0;
+        this.hitsLastIdx = 0;
     }
     
     /**
-     * Set the hits list.
-     * @param s the specified {@code String}
+     * Get the hits list.
      * @param keyArray the key array
+     * @param key the specified {@code String}
+     * @return the list of hits
      */
-    public void setHits(String s, String[] keyArray) {
-        int hitsFirstIdx = searchFirstMatch(s, keyArray);
-        int hitsLastIdx = searchFirstMatch(s + '\uFFFF', keyArray);
-        
-        if (hitsLastIdx - hitsFirstIdx > FIRSTTENDISPLAYEDHIT) {
-            hitsLastIdx = hitsFirstIdx + FIRSTTENDISPLAYEDHIT;
+    public List<String> getHits(String[] keyArray, String key) {
+        setIndexes(keyArray, key);
+        if (hitsLastIdx - hitsFirstIdx > FIRST_TEN_DISPLAYED_HIT) {
+            hitsLastIdx = hitsFirstIdx + FIRST_TEN_DISPLAYED_HIT;
         }
-
-        search.clear();
+        List<String> hits = new ArrayList<>();
         for (int i = hitsFirstIdx; i < hitsLastIdx; i++) { 
-            search.addHit(keyArray[i]);
+            hits.add(keyArray[i]);
         }
+        return hits;
     }
     
     /**
      * Return the counting hits.
+     * @param keyArray the key array
+     * @param key the specified {@code String}
      * @return number of hits
      */
-    public int getMaxHits() {
-        return search.getMaxHits();
+    public int getMaxHits(String[] keyArray, String key) {
+        setIndexes(keyArray, key);
+        return hitsLastIdx - hitsFirstIdx;
     }
     
     /**
-     * The maximum number of hits by the specified {@code String}.
-     * @param s the specified {@code String}
-     * @param keyArray the key array
+     * Set the first hit's index and last hit's index, where the word begin 
+     * with the specified key.
+     * @param keyArray the actual dictionary's key array
+     * @param key the specified key
      */
-    public void setMaxHits(String s, String[] keyArray) {
-        int hitsFirstIdx = searchFirstMatch(s, keyArray);
-        int hitsLastIdx = searchFirstMatch(s + '\uFFFF', keyArray);
-        
-        search.setMaxHits(hitsLastIdx - hitsFirstIdx);
+    private void setIndexes(String[] keyArray, String key) {
+        hitsFirstIdx = searchMatch(keyArray, key);
+        hitsLastIdx = searchMatch(keyArray, key + '\uFFFF');
     }
     
     /**
-     * Search the first index of specified {@code String} in the key array.
-     * @param str the specified {@code String}
+     * Search the first/"last" index of specified {@code String} 
+     * in the key array.
+     * @param key the specified {@code String}
      * @param keyArray the key array
      * @return the first index by the specified {@code String}
      */
-    private int searchFirstMatch(String str, String[] keyArray) {
-        int first = 0;
-        int last = keyArray.length - 1;
-        int result;
-        
-        while (first <= last) {
-            int middle = (first + last) / 2;
-            
-            if ((result = keyArray[middle].compareTo(str)) < 0) {
-                first = middle + 1;
-            } else {
-                if (result > 0) {
-                    last = middle - 1;
-                } else {
-                    return middle;
-                }
-            }
-        } 
-        
-        return first;
+    private int searchMatch(String[] keyArray, String key) {
+        int index = Arrays.binarySearch(keyArray, key);
+        if (index < 0) {
+            index *= -1;
+            index -= 1;
+        }
+        return index;
     }
 }

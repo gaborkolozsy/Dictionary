@@ -3,6 +3,8 @@
  */
 package hu.gaborkolozsy.dictionary.controller.interfaces;
 
+import java.io.IOException;
+
 /**
  * Service interface.
  * 
@@ -13,21 +15,26 @@ package hu.gaborkolozsy.dictionary.controller.interfaces;
 public interface Service<T> {
     
     /**
-     * Getter.
+     * Get data.
      * @return the object data member
+     * @throws IOException by failed I/O operations
+     * @throws NoSuchMethodException if method not found with specified name
      */
-    String get();
+    T get() throws IOException, NoSuchMethodException;
     
     /**
-     * Setter.
-     * @param s the new data member of object
+     * Set config.
+     * @param text user typed text
+     * @throws java.io.IOException by failed I/O operations
      */
-    void set(String s);
+    void setConfig(String text) throws IOException;
     
     /**
      * Return a {@code T} object.
+     * @param text user typed text
      * @return {@code T} object
+     * @throws IOException by failed I/O operations
      * @throws NoSuchMethodException if method not found with specified name
      */
-    T choose() throws NoSuchMethodException;
+    T choose(String text) throws IOException, NoSuchMethodException;
 }

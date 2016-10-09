@@ -1,7 +1,7 @@
 /*
  * Copyright © 2016, Gábor Kolozsy. All rights reserved.
  */
-package hu.gaborkolozsy.dictionary.controller;
+package hu.gaborkolozsy.dictionary.model;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -30,7 +30,7 @@ public class Config {
     /**
      * Load properties.
      * @param key the key
-     * @return propertie by specified key
+     * @return property by specified key
      * @throws IOException by file error
      */
     public String getPropertie(String key) throws IOException {
@@ -45,7 +45,7 @@ public class Config {
      * @throws IOException by file error
      */
     public void storePropertie(String key, String value) throws IOException {
-        properties.setProperty(key, value);
-        properties.store(new FileOutputStream(FILE), "Config");
+        this.properties.setProperty(key, value);
+        this.properties.store(new FileOutputStream(FILE), "Config");
     }
 }

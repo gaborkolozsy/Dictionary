@@ -3,7 +3,7 @@
  */
 package hu.gaborkolozsy.dictionary.controller;
 
-import hu.gaborkolozsy.dictionary.model.Dictionary;
+import hu.gaborkolozsy.dictionary.model.DictionaryBox;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -11,11 +11,11 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 
 /**
- * {@code DictionaryService} object.
+ * Dictionary service.
  * 
  * @author Kolozsy Gábor (kolozsygabor@gmail.com)
  * 
- * @see hu.gaborkolozsy.dictionary.model.Dictionary
+ * @see hu.gaborkolozsy.dictionary.model.DictionaryBox
  * @see java.io.BufferedReader
  * @see java.io.FileInputStream
  * @see java.io.IOException
@@ -25,84 +25,99 @@ import java.util.Arrays;
  */
 public class DictionaryService {
     
-    /** {@code Dictionary} object. */
-    private final Dictionary reader = new Dictionary();
+    /** {@code DictionaryBox} object. */
+    private final DictionaryBox dictionaryBox;
+    
+    /** New line in dictionary. */
+    private String line;
+    
+    /** First(from) read. */
+    private Boolean first;
+    
+    /** Translate it. */
+    private String from;
+    
+    /** What's mean. */
+    private String to;
+
+    /**
+     * Constructor.
+     */
+    public DictionaryService() {
+        this.dictionaryBox = new DictionaryBox();
+        this.first = true;
+        this.from = "";
+        this.to = "";
+    }
     
     /**
      * Read the dictionary by specified file name.
+     * just on Mac => input = new BufferedReader(new FileReader(file)
      * @param fileName dictionary file name
      * @throws IOException If an I/O error occurs
      */
-    public void ReadFile(String fileName) throws IOException { 
-        if (!reader.isEmpty()) {
-            reader.clear();
-        }
-        
-        String file = "lang/"+fileName+".txt";
-        
-        // on mac
-        //BufferedReader input = new BufferedReader(new FileReader(f));
-        
-        // on mac and windows too
+    public void readFile(String fileName) throws IOException { 
+        final String file = "lang/"+fileName+".txt";
         BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
-        String line;
-        Boolean firstColumn = true;
-        String from = "";
-        String to = "";
+        readDictionary(input);
+    }
 
+    /**
+     * Read dictionary and put it to the map.
+     * @param input {@code BufferedReader} object
+     * @throws IOException 
+     */
+    private void readDictionary(BufferedReader input) throws IOException {
+        dictionaryClear();
         while ((line = input.readLine()) != null) {
             if (line.length() > 0) {
-                if (firstColumn) {
+                if (first) {
                     from = line;
-                    firstColumn = false;
+                    first = false;
+                } else { if (to.length() > 0) {
+                    to = to + "/" + line;
                 } else {
-                    if (to.length() > 0) {
-                        to = to + "/" + line;
-                    } else {
-                        to = line;
-                    }
-                }
+                    to = line;
+                }}
             } else {
-                reader.put(from, to);
+                dictionaryBox.put(from, to);
                 to = "";
-                firstColumn = true;
+                first = true;
             }
         }
-        
-        setKeyArray();
     }
-    
+
     /**
-     * Return the value.
-     * @param key the specified key
-     * @return the value by the specified key
+     * Clear dictionary if not empty.
      */
-    public String getValue(String key) {
-        return reader.getValue(key);
+    private void dictionaryClear() {
+        if (!dictionaryBox.isEmpty()) {
+            dictionaryBox.clear();
+        }
     }
     
     /**
-     * Return the key array.
+     * Return the dictionary's key array.
      * @return key array
      */
     public String[] getKeyArray() {
-        return reader.getKeyArray();
-    }
-    
-    /**
-     * Set key array.
-     */
-    private void setKeyArray() {
-        String[] keyArray = new String[reader.getSize()];
-        
+        String[] keyArray = new String[dictionaryBox.getSize()];
         int i = 0;
-        for (Object s : reader.getKeySet()) {
+        for (Object s : dictionaryBox.getKeySet()) {
             keyArray[i] = (String) s;
             i++;
         }
-        
         Arrays.sort(keyArray);
-        reader.setKeyArray(keyArray);
+        return keyArray;
+    }
+    
+    /**
+     * Return the value by the specified key.
+     * @param key the specified key
+     * @return the value
+     */
+    public String getValue(String key) {
+        return dictionaryBox.getValue(key);
     }
     
     /**
@@ -110,6 +125,6 @@ public class DictionaryService {
      * @return the size
      */
     public int getSize() {
-        return reader.getSize();
+        return dictionaryBox.getSize();
     }
 }
