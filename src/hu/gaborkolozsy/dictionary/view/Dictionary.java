@@ -304,7 +304,7 @@ public class Dictionary extends JFrame {
         });
         
         // hackerrank
-        this.hacker.addMouseListener(new MouseAdapter() {
+        this.google.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 getWWW("http://www.hackerrank.com/");
@@ -349,14 +349,13 @@ public class Dictionary extends JFrame {
         dictInfo = new javax.swing.JLabel();
         themeInfo = new javax.swing.JLabel();
         google = new javax.swing.JLabel();
-        hacker = new javax.swing.JLabel();
         fontInfo = new javax.swing.JLabel();
+        google1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(name + "'s Dictionary");
         setAlwaysOnTop(true);
         setBounds(new java.awt.Rectangle(0, 22, 500, 240));
-        setMaximumSize(new java.awt.Dimension(500, 240));
         setMinimumSize(new java.awt.Dimension(500, 240));
         setResizable(false);
         setSize(new java.awt.Dimension(500, 240));
@@ -459,17 +458,17 @@ public class Dictionary extends JFrame {
         google.setText("G");
         google.setToolTipText("<html><a href=http://>google.hu</a></html>");
 
-        hacker.setBackground(new java.awt.Color(0, 0, 0));
-        hacker.setFont(new java.awt.Font("Herculanum", 0, 18)); // NOI18N
-        hacker.setForeground(new java.awt.Color(32, 96, 200));
-        hacker.setText("H");
-        hacker.setToolTipText("<html><a href=http://>hackerrank.com</a></html>");
-
         fontInfo.setBackground(new java.awt.Color(0, 0, 0));
         fontInfo.setFont(new java.awt.Font("Herculanum", 0, 18)); // NOI18N
         fontInfo.setForeground(new java.awt.Color(32, 96, 200));
         fontInfo.setText("F");
         fontInfo.setToolTipText("<html><h4><a href=http://blank>How to choose font type</a></h4>\n\ntype <font color=\"rgb(32,96,200)\" size=\"3\"><b>@</b></font> and an <b>ID</b>\n   \n<blockquote>\n  <table border=1 style=\"background-color: black\">\n   <tr>\n       <th style=\"color:rgb(32,96,200)\"><font color=\"rgb(32,96,200)\" face=\"HERCULANUM\" size=\"4\">ID</font></th>\n       <th style=\"color:rgb(32,96,200)\"><font color=\"rgb(32,96,200)\" face=\"HERCULANUM\" size=\"4\">Font</font></th>\n   </tr>\n   <tr>\n       <td style=\"color:white\"><center><b>1</b></center></td>\n       <td style=\"color:white\"><font face=\"HERCULANUM\" size=\"3\" color=\"white\"><center>HERCULANUM</font></b></center></td>\n   </tr>\n   <tr>\n       <td style=\"color:white\"><center><b>2</b></center></td>\n       <td style=\"color:white\"><font face=\"Dialog\" size=\"3\" color=\"white\"><center>Dialog</font></b></center></td>\n   </tr>\n   <tr>\n       <td style=\"color:white\"><center><b>3</b></center></td>\n       <td style=\"color:white\"><font face=\"Comic Sans MS\" size=\"3\" color=\"white\"><center>Comic Sans MS</font></b></center></td>\n   </tr>\n  </table>\n</blockquote>\n\nand press <font color=\"rgb(32,96,200)\" size=\"3\"><b><code>Enter</code></b></font><br><br>\n\n<font size=\"3\"><b>For example:</b></font>\n\n<ol>\n   <li><b><font color=\"rgb(32,96,200)\">@2</font></b></li>\n   <li><b><font color=\"red\">blah</font><font color=\"rgb(32,96,200)\">@2</b></font></li>\n</ol>\n\n\nand enjoy ... <font color=\"rgb(32,96,200)\" size=\"6\"><b>☮</b></font></html>");
+
+        google1.setBackground(new java.awt.Color(0, 0, 0));
+        google1.setFont(new java.awt.Font("Herculanum", 0, 18)); // NOI18N
+        google1.setForeground(new java.awt.Color(32, 96, 200));
+        google1.setText("H");
+        google1.setToolTipText("<html><a href=http://>hackerrank.com</a></html>");
 
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
@@ -490,8 +489,8 @@ public class Dictionary extends JFrame {
                     .addGroup(jPanelLayout.createSequentialGroup()
                         .addComponent(google)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hacker)
-                        .addGap(115, 115, 115)
+                        .addComponent(google1)
+                        .addGap(117, 117, 117)
                         .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(dictInfo)
@@ -510,8 +509,8 @@ public class Dictionary extends JFrame {
                     .addComponent(dictInfo)
                     .addComponent(themeInfo)
                     .addComponent(google)
-                    .addComponent(hacker)
-                    .addComponent(fontInfo))
+                    .addComponent(fontInfo)
+                    .addComponent(google1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -752,7 +751,7 @@ public class Dictionary extends JFrame {
     private javax.swing.JLabel dictInfo;
     private javax.swing.JLabel fontInfo;
     private javax.swing.JLabel google;
-    private javax.swing.JLabel hacker;
+    private javax.swing.JLabel google1;
     private javax.swing.JPanel jPanel;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTextField search;
