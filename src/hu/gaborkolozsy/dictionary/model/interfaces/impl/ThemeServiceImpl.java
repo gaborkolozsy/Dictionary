@@ -1,9 +1,9 @@
 /*
  * Copyright © 2016, Gábor Kolozsy. All rights reserved.
  */
-package hu.gaborkolozsy.dictionary.controller.interfaces.impl;
+package hu.gaborkolozsy.dictionary.model.interfaces.impl;
 
-import hu.gaborkolozsy.dictionary.controller.interfaces.Service;
+import hu.gaborkolozsy.dictionary.model.interfaces.Service;
 import hu.gaborkolozsy.dictionary.model.Config;
 import hu.gaborkolozsy.dictionary.view.Dictionary;
 import java.io.IOException;
@@ -14,14 +14,14 @@ import java.lang.reflect.Method;
  * 
  * @author Kolozsy Gábor (kolozsygabor@gmail.com)
  * 
- * @see hu.gaborkolozsy.dictionary.controller.interfaces.Service
+ * @see hu.gaborkolozsy.dictionary.model.interfaces.Service
  * @see hu.gaborkolozsy.dictionary.model.Config
  * @see hu.gaborkolozsy.dictionary.view.Dictionary
  * @see java.io.IOException
  * @see java.lang.reflect.Method
  * @since 0.1.1
  */
-public class ThemeServiceServiceImpl implements Service<Method> {
+public class ThemeServiceImpl implements Service<Method> {
     
     /** {@code Config} object. */
     private final Config config;
@@ -31,7 +31,7 @@ public class ThemeServiceServiceImpl implements Service<Method> {
      * @param config the {@code Config} object
      * @throws IOException by failed I/O operations
      */
-    public ThemeServiceServiceImpl(Config config) throws IOException {
+    public ThemeServiceImpl(Config config) throws IOException {
         this.config = config;
     }
     
@@ -51,7 +51,7 @@ public class ThemeServiceServiceImpl implements Service<Method> {
      * @param theme the actual theme ID
      */
     @Override
-    public void setConfig(String theme) throws IOException {
+    public void set(String theme) throws IOException {
         this.config.storePropertie("Theme", theme);
     }
     

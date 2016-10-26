@@ -1,7 +1,7 @@
 /*
  * Copyright © 2016, Gábor Kolozsy. All rights reserved.
  */
-package hu.gaborkolozsy.dictionary.controller.interfaces;
+package hu.gaborkolozsy.dictionary.model.interfaces;
 
 import java.io.IOException;
 
@@ -23,11 +23,11 @@ public interface Service<T> {
     T get() throws IOException, NoSuchMethodException;
     
     /**
-     * Set config.
+     * Set data.
      * @param text user typed text
      * @throws java.io.IOException by failed I/O operations
      */
-    void setConfig(String text) throws IOException;
+    void set(String text) throws IOException;
     
     /**
      * Return a {@code T} object.

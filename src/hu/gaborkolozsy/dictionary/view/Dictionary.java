@@ -5,11 +5,11 @@ package hu.gaborkolozsy.dictionary.view;
 
 import hu.gaborkolozsy.dictionary.controller.DictionaryService;
 import hu.gaborkolozsy.dictionary.controller.SearchService;
-import hu.gaborkolozsy.dictionary.controller.interfaces.Service;
-import hu.gaborkolozsy.dictionary.controller.interfaces.impl.FileServiceServiceImpl;
-import hu.gaborkolozsy.dictionary.controller.interfaces.impl.FontServiceServiceImpl;
-import hu.gaborkolozsy.dictionary.controller.interfaces.impl.ThemeServiceServiceImpl;
 import hu.gaborkolozsy.dictionary.model.Config;
+import hu.gaborkolozsy.dictionary.model.interfaces.Service;
+import hu.gaborkolozsy.dictionary.model.interfaces.impl.FileServiceImpl;
+import hu.gaborkolozsy.dictionary.model.interfaces.impl.FontServiceImpl;
+import hu.gaborkolozsy.dictionary.model.interfaces.impl.ThemeServiceImpl;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.EventQueue;
@@ -46,10 +46,10 @@ import javax.swing.table.DefaultTableModel;
  * 
  * @see hu.gaborkolozsy.dictionary.controller.DictionaryService
  * @see hu.gaborkolozsy.dictionary.controller.SearchService
- * @see hu.gaborkolozsy.dictionary.controller.interfaces.Service
- * @see hu.gaborkolozsy.dictionary.controller.interfaces.impl.FileServiceServiceImpl
- * @see hu.gaborkolozsy.dictionary.controller.interfaces.impl.FontServiceServiceImpl
- * @see hu.gaborkolozsy.dictionary.controller.interfaces.impl.ThemeServiceServiceImpl
+ * @see hu.gaborkolozsy.dictionary.model.interfaces.Service
+ * @see hu.gaborkolozsy.dictionary.model.interfaces.impl.FileServiceImpl
+ * @see hu.gaborkolozsy.dictionary.model.interfaces.impl.FontServiceImpl
+ * @see hu.gaborkolozsy.dictionary.model.interfaces.impl.ThemeServiceImpl
  * @see hu.gaborkolozsy.dictionary.model.Config
  * @see java.awt.Color
  * @see java.awt.Desktop
@@ -86,14 +86,14 @@ public class Dictionary extends JFrame {
     /** {@code Config} object. */
     private static final Config config = new Config();
     
-    /** {@code FileServiceServiceImpl} object. */
-    private final FileServiceServiceImpl fileService = new FileServiceServiceImpl(config);
+    /** {@code FileServiceImpl} object. */
+    private final FileServiceImpl file = new FileServiceImpl(config);
     
-    /** {@code ThemeServiceServiceImpl} object. */
-    private final Service themeService = new ThemeServiceServiceImpl(config);
+    /** {@code ThemeServiceImpl} object. */
+    private final Service theme = new ThemeServiceImpl(config);
     
-    /** {@code FontServiceServiceImpl} object. */
-    private final Service fontService = new FontServiceServiceImpl(config);
+    /** {@code FontServiceImpl} object. */
+    private final Service font = new FontServiceImpl(config);
     
     /** {@code Reader} object. */
     private static final DictionaryService dictionaryService = new DictionaryService();
@@ -124,7 +124,8 @@ public class Dictionary extends JFrame {
      * Creates new form Dictionarys.
      * 
      * @throws IOException by I/O error
-     * @throws IllegalAccessException if an application tries to reflectively create an instance ..
+     * @throws IllegalAccessException if an application tries to reflectively 
+     * create an instance ..
      * @throws InvocationTargetException is a checked exception ..
      * @throws NoSuchMethodException if a particular method not found
      */
@@ -145,17 +146,19 @@ public class Dictionary extends JFrame {
                 table.getTableHeader().getDefaultRenderer();
         renderer.setHorizontalAlignment(JLabel.CENTER);
         
-        fileName = fileService.get();
+        fileName = file.get();
         dictionaryService.readFile(fileName);
         
         // set table header
-        table.getColumnModel().getColumn(0).setHeaderValue(fileService.split(fileName, 0));
-        table.getColumnModel().getColumn(1).setHeaderValue(fileService.split(fileName, 1));
+        table.getColumnModel().getColumn(0)
+                .setHeaderValue(file.split(fileName, 0));
+        table.getColumnModel().getColumn(1)
+                .setHeaderValue(file.split(fileName, 1));
         table.getTableHeader().resizeAndRepaint();
         
-        Method method = (Method) themeService.get();
+        Method method = (Method) theme.get();
         method.invoke(this); // set theme
-        setFont((String) fontService.get());
+        setFont((String) font.get());
         
         this.sumOf.setText(String.valueOf(dictionaryService.getSize()));
         this.status.setText("dictionary read in");
@@ -172,13 +175,15 @@ public class Dictionary extends JFrame {
                     text.endsWith("#5") ||
                     text.endsWith("#6")) {
                     result = text.split("(#\\w+#|##|#)");
-                    fileService.setConfig(result[1]);
-                    fileName = fileService.choose(result[1]);
+                    file.set(result[1]);
+                    fileName = file.choose(result[1]);
                     dictionaryService.readFile(fileName);
 
-                    // setConfig table header
-                    table.getColumnModel().getColumn(0).setHeaderValue(fileService.split(fileName, 0));
-                    table.getColumnModel().getColumn(1).setHeaderValue(fileService.split(fileName, 1));
+                    // set table header
+                    table.getColumnModel().getColumn(0)
+                            .setHeaderValue(file.split(fileName, 0));
+                    table.getColumnModel().getColumn(1)
+                            .setHeaderValue(file.split(fileName, 1));
                     table.getTableHeader().resizeAndRepaint();
 
                     sumOf.setText(String.valueOf(dictionaryService.getSize()));
@@ -187,16 +192,16 @@ public class Dictionary extends JFrame {
                              text.endsWith(":2") ||
                              text.endsWith(":3")) {
                     result = text.split("(:\\w+:|::|:)");
-                    themeService.setConfig(result[1]);
-                    Method meth = (Method) themeService.choose(result[1]);
+                    theme.set(result[1]);
+                    Method meth = (Method) theme.choose(result[1]);
                     meth.invoke(this); // set theme
                     setSearchField();
                 } else { if (text.endsWith("@1") ||
                              text.endsWith("@2") ||
                              text.endsWith("@3")) {
                     result = text.split("(@\\w+@|@@|@)");
-                    fontService.setConfig(result[1]);
-                    setFont((String) fontService.choose(result[1])); // set font
+                    font.set(result[1]);
+                    setFont((String) font.choose(result[1]));
                     setSearchField();
                 }}}
             } catch (IOException | NoSuchMethodException | 
@@ -238,10 +243,10 @@ public class Dictionary extends JFrame {
                 
                 // set status text field
                 int max = searchService.getMaxHits(keys, text);
+                String words = " words";
                 if (max > 10) {
-                    status.setText("first 10 / " + max + " words");
+                    status.setText("first 10 / " + max + words);
                 } else {
-                    String words = " words";
                     if (max <= 1) words = " word";
                     status.setText(max + words);
                 }
@@ -369,11 +374,6 @@ public class Dictionary extends JFrame {
         search.setForeground(new java.awt.Color(255, 255, 255));
         search.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         search.setText("type something..");
-
-	if (System.getProperty("os.name").startsWith("Win")) {
-            this.search.setText("");
-        }
-
         search.setToolTipText("type something..");
         search.setBorder(null);
         search.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
