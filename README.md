@@ -4,7 +4,7 @@
 
 ## Description
 
-This `Dictionary`is an offline dictionary. It includes all combination of the following
+This `Dictionary` is an offline dictionary. It includes all combination of the following
 3 languages: english, german and hungarian.  
 You can search for over 70.000 words, combination of words and sentences.
 
