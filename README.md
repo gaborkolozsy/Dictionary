@@ -4,11 +4,13 @@
 | :---------:|:---------:
 ![](https://gitlab.com/KolozsyGabor/Dictionary/raw/master/resources/images/Dictionary-Dark.png) | ![](https://gitlab.com/KolozsyGabor/Dictionary/raw/master/resources/images/Dictionary-Light.png)
 <br>
+
 # Description
 
 This `Dictionary` is an offline dictionary. It includes all combination of the following
 3 languages: english, german and hungarian.  
 You can search for over `70.000` words, combination of words and sentences per dictionary. :smile:
+<br>
 <br>
 # Dictionaries
 
