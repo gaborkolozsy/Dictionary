@@ -1,18 +1,22 @@
 # Dictionary - Java based application
 
-![](https://gitlab.com/KolozsyGabor/Dictionary/raw/master/resources/images/Dictionary.png)
-
-## Description
+| Dark Theme | Light Theme
+| :---------:|:---------:
+![](https://gitlab.com/KolozsyGabor/Dictionary/raw/master/resources/images/Dictionary-Dark.png) | ![](https://gitlab.com/KolozsyGabor/Dictionary/raw/master/resources/images/Dictionary-Light.png)
+<br>
+# Description
 
 This `Dictionary` is an offline dictionary. It includes all combination of the following
 3 languages: english, german and hungarian.  
-You can search for over 70.000 words, combination of words and sentences.
+You can search for over `70.000` words, combination of words and sentences per dictionary. :smile:
+<br>
+# Dictionaries
 
-## Dictionaries
-
-* `English-Hungarian` - **169425** words
-* `Hungarian-English` - **91688** words
-* `German-Hungarian` - **129481** words
-* `Hungarian-German` - **69995** words
-* `English-German` - **141287** words
-* `German-English` - **193860** words
+ Dictionaries | Count of Words
+ :---:|:---:
+ :gb: `English-Hungarian` :hu: | **169425**
+ :hu: `Hungarian-English` :gb: | **91688**
+ :de: `German-Hungarian` :hu: | **129481**
+ :hu: `Hungarian-German` :de: | **69995**
+ :gb: `English-German` :de: | **141287**
+ :de: `German-English` :gb: | **193860**
