@@ -51,7 +51,8 @@ For fix this problem follow the next:
 | :de: `German-English`   :gb: | **193860**     |
 
 <br>
-[⬆︎UP](#dictionary---java-application)
+
+[⬆︎ UP](#dictionary---java-application)
 
 # &nbsp;
 <br>
