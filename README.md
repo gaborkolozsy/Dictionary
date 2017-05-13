@@ -27,7 +27,7 @@ You can search for over `70.000` words, combination of words and sentences per d
 # Construction
 
 The application is a simple java project and it was edited in NetBeans. So the project is a NetBeans project.
-The project may open and launch in Eclipse as well. In this case the splash screen will **<u>not</u>** show automatically.
+The project may open and launch in Eclipse as well. In this case the splash screen will <u>`not`</u> show automatically.
 
 ## Refit splash screen on Eclipse
 
