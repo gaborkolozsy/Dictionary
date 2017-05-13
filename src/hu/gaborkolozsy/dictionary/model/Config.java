@@ -12,7 +12,7 @@ import java.util.Properties;
 /**
  * Get and store properties.
  * 
- * @author Kolozsy Gábor (gabor.kolozsy.development@gmail.com)
+ * @author Gabor Kolozsy (gabor.kolozsy.development@gmail.com)
  * 
  * @see java.io.FileInputStream
  * @see java.io.FileOutputStream

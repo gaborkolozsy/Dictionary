@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * File service.
  * 
- * @author Kolozsy Gábor (gabor.kolozsy.development@gmail.com)
+ * @author Gabor Kolozsy (gabor.kolozsy.development@gmail.com)
  * 
  * @see Service
  * @see Config

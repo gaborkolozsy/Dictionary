@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * DictionaryBox box.
  * 
- * @author Kolozsy Gábor (gabor.kolozsy.development@gmail.com)
+ * @author Gabor Kolozsy (gabor.kolozsy.development@gmail.com)
  * @see HashMap
  * @see Map
  * @see Set

@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * Service interface.
  * 
- * @author Kolozsy Gábor (gabor.kolozsy.development@gmail.com)
+ * @author Gabor Kolozsy (gabor.kolozsy.development@gmail.com)
  * @param <T>  return type
  * @since 0.1.1
  */
