@@ -1,5 +1,17 @@
 /*
- * Copyright © 2016, Gábor Kolozsy. All rights reserved.
+ * Copyright © 2016, Gábor Kolozsy
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package hu.gaborkolozsy.dictionary.view;
 
@@ -39,44 +51,44 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  * Dictionary.
- * (editing on Mac OS X and look better on it)
+ * (editing on Mac OS X and looks better on it)
  * 
- * @author Kolozsy Gábor (kolozsygabor@gmail.com)
+ * @author Kolozsy Gábor (gabor.kolozsy.development@gmail.com)
  * @version 0.1.1
  * 
- * @see hu.gaborkolozsy.dictionary.controller.DictionaryService
- * @see hu.gaborkolozsy.dictionary.controller.SearchService
- * @see hu.gaborkolozsy.dictionary.model.interfaces.Service
- * @see hu.gaborkolozsy.dictionary.model.interfaces.impl.FileServiceImpl
- * @see hu.gaborkolozsy.dictionary.model.interfaces.impl.FontServiceImpl
- * @see hu.gaborkolozsy.dictionary.model.interfaces.impl.ThemeServiceImpl
- * @see hu.gaborkolozsy.dictionary.model.Config
- * @see java.awt.Color
- * @see java.awt.Desktop
- * @see java.awt.EventQueue
- * @see java.awt.Font
- * @see java.awt.event.ActionEvent
- * @see java.awt.event.KeyEvent
- * @see java.awt.event.KeyListener
- * @see java.awt.event.MouseAdapter
- * @see java.awt.event.MouseEvent
- * @see java.awt.event.MouseListener
- * @see java.io.IOException
- * @see java.lang.reflect.InvocationTargetException
- * @see java.lang.reflect.Method
- * @see java.net.URI
- * @see java.net.URISyntaxException
- * @see java.util.List
- * @see java.util.concurrent.TimeUnit
- * @see javax.swing.BorderFactory
- * @see javax.swing.JFrame
- * @see javax.swing.JLabel
- * @see javax.swing.JOptionPane
- * @see javax.swing.ToolTipManager
- * @see javax.swing.UIManager
- * @see javax.swing.UnsupportedLookAndFeelException
- * @see javax.swing.table.DefaultTableCellRenderer
- * @see javax.swing.table.DefaultTableModel
+ * @see DictionaryService
+ * @see SearchService
+ * @see Config
+ * @see Service
+ * @see FileServiceImpl
+ * @see FontServiceImpl
+ * @see ThemeServiceImpl
+ * @see Color
+ * @see Desktop
+ * @see EventQueue
+ * @see Font
+ * @see ActionEvent
+ * @see KeyEvent
+ * @see KeyListener
+ * @see MouseAdapter
+ * @see MouseEvent
+ * @see MouseListener
+ * @see IOException
+ * @see InvocationTargetException
+ * @see Method
+ * @see URI
+ * @see URISyntaxException
+ * @see List
+ * @see TimeUnit
+ * @see BorderFactory
+ * @see JFrame
+ * @see JLabel
+ * @see JOptionPane
+ * @see ToolTipManager
+ * @see UIManager
+ * @see UnsupportedLookAndFeelException
+ * @see DefaultTableCellRenderer
+ * @see DefaultTableModel
  */
 public class Dictionary extends JFrame {
 
