@@ -2,7 +2,7 @@
 
 Dark Theme | Light Theme
 :---------:|:---------:
-![Image of Dictionary](https://gitlab.com/gaborkolozsy/Dictionary/raw/master/resources/images/Dictionary-Dark.png) | ![Image of Dictionary](https://gitlab.com/gaborkolozsy/Dictionary/raw/master/resources/images/Dictionary-Light.png)
+![Image of Dictionary](https://cloud.githubusercontent.com/assets/23102020/26023652/79d4d702-37c1-11e7-9ecf-ced7c3e97b80.png) | ![Image of Dictionary](https://gitlab.com/gaborkolozsy/Dictionary/raw/master/resources/images/Dictionary-Light.png)
 <br>
 
 # Description
