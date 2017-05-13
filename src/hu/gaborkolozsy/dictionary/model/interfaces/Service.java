@@ -1,6 +1,7 @@
 /*
- * Copyright © 2016, Gábor Kolozsy. All rights reserved.
+ * Copyright © 2016, Gábor Kolozsy
  */
+
 package hu.gaborkolozsy.dictionary.model.interfaces;
 
 import java.io.IOException;
@@ -8,7 +9,7 @@ import java.io.IOException;
 /**
  * Service interface.
  * 
- * @author Kolozsy Gábor (kolozsygabor@gmail.com)
+ * @author Kolozsy Gábor (gabor.kolozsy.development@gmail.com)
  * @param <T>  return type
  * @since 0.1.1
  */
