@@ -37,7 +37,7 @@ For fix this problem follow the next:
 2. Choose -> Run/Debug Settings
 3. Mark out -> Dictionary then click Edit...
 4. Choose -> Arguments
-5. In VM arguments field paste -> -splash:resources/images/Splash.png
+5. In VM arguments field paste -> `-splash:resources/images/Splash.png`
 
 # Dictionaries
 
