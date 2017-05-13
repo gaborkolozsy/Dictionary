@@ -11,7 +11,7 @@ Dark Theme | Light Theme
 * [Construction](#construction)
     * [Refit splash screen on Eclipse](#refit-splash-screen-on-eclipse)
 * [Dictionaries](#dictionaries)
-* [License](#LICENSE.txt)
+* [License](LICENSE.txt)
 
 # Description
 
@@ -50,7 +50,8 @@ For fix this problem follow the next:
 | :gb: `English-German`   :de: | **141287**     |
 | :de: `German-English`   :gb: | **193860**     |
 
-[⬆︎](#dictionary---java-application)
+<br>
+[⬆︎UP](#dictionary---java-application)
 
 # &nbsp;
 <br>
