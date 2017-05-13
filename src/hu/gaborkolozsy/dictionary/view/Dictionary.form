@@ -241,7 +241,7 @@
               <Color blue="c8" green="60" red="20" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xa9; KG"/>
-            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Copyright &#xa9; 2016 G&#xe1;bor Kolozsy&lt;br&gt;&#xa;&lt;a href=&quot;http ://blank&quot;&gt;kolozsygabor@gmail.com&lt;/a&gt;"/>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Copyright &#xa9; 2016 Gabor Kolozsy&lt;br&gt;&#xa;&lt;a href=&quot;http ://blank&quot;&gt;gabor.kolozsy.development@gmail.com&lt;/a&gt;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="sumOf">

@@ -370,7 +370,7 @@ public class Dictionary extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
-                    Desktop.getDesktop().mail(new URI("mailto:kolozsygabor@gmail.com"
+                    Desktop.getDesktop().mail(new URI("mailto:gabor.kolozsy.development@gmail.com"
                             + "?subject=Dictionary&body=Hi!"));
                 } catch (IOException | URISyntaxException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -418,11 +418,6 @@ public class Dictionary extends JFrame {
         search.setForeground(new java.awt.Color(255, 255, 255));
         search.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         search.setText("type something..");
-
-	if (System.getProperty("os.name").startsWith("Win")) {
-            this.search.setText("");
-        }
-
         search.setToolTipText("type something..");
         search.setBorder(null);
         search.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
@@ -480,7 +475,7 @@ public class Dictionary extends JFrame {
         copyright.setFont(new java.awt.Font("Herculanum", 1, 12)); // NOI18N
         copyright.setForeground(new java.awt.Color(32, 96, 200));
         copyright.setText("© KG");
-        copyright.setToolTipText("<html>Copyright © 2016, Gábor Kolozsy<br>\n<a href=\"http ://blank\">kolozsygabor@gmail.com</a>");
+        copyright.setToolTipText("<html>Copyright © 2016 Gabor Kolozsy<br>\n<a href=\"http ://blank\">gabor.kolozsy.development@gmail.com</a>");
 
         sumOf.setBackground(new java.awt.Color(0, 0, 0));
         sumOf.setFont(new java.awt.Font("Herculanum", 0, 12)); // NOI18N
