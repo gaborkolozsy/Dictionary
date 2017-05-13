@@ -1,6 +1,7 @@
 /*
- * Copyright © 2016, Gábor Kolozsy. All rights reserved.
+ * Copyright © 2016, Gábor Kolozsy
  */
+
 package hu.gaborkolozsy.dictionary.model;
 
 import java.util.HashMap;
@@ -10,7 +11,7 @@ import java.util.Set;
 /**
  * DictionaryBox box.
  * 
- * @author Kolozsy Gábor (kolozsygabor@gmail.com)
+ * @author Kolozsy Gábor (gabor.kolozsy.development@gmail.com)
  * 
  * @see java.util.HashMap
  * @see java.util.Map
@@ -19,7 +20,9 @@ import java.util.Set;
  */
 public class DictionaryBox {
 
-    /** DictionaryBox map. */
+    /** 
+     * DictionaryBox map. 
+     */
     private final Map<String, String> dictionary = new HashMap<>();
     
     /**
