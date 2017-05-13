@@ -93,40 +93,64 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Dictionary extends JFrame {
 
-    /** A felhasználónév. */
+    /** 
+     * Username. 
+     */
     private final String name = System.getProperty("user.name");
     
-    /** {@code Config} object. */
+    /** 
+     * {@code Config} object. 
+     */
     private static final Config config = new Config();
     
-    /** {@code FileServiceImpl} object. */
+    /** 
+     * {@code FileServiceImpl} object. 
+     */
     private final FileServiceImpl file = new FileServiceImpl(config);
     
-    /** {@code ThemeServiceImpl} object. */
+    /** 
+     * {@code ThemeServiceImpl} object. 
+     */
     private final Service theme = new ThemeServiceImpl(config);
     
-    /** {@code FontServiceImpl} object. */
+    /** 
+     * {@code FontServiceImpl} object. 
+     */
     private final Service font = new FontServiceImpl(config);
     
-    /** {@code Reader} object. */
+    /** 
+     * {@code Reader} object. 
+     */
     private static final DictionaryService dictionaryService = new DictionaryService();
     
-    /** {@code Search} object. */
+    /** 
+     * {@code Search} object. 
+     */
     private final SearchService searchService = new SearchService();
     
-    /** Default table model. */
+    /** 
+     * Default table model. 
+     */
     private static DefaultTableModel tableM;
     
-    /** The dictionary's name. */
+    /** 
+     * The dictionary's name. 
+     */
     private static String fileName;
     
-    /** Word to translation. */
+    /** 
+     * Word to translation. 
+     */
     private static String from;
     
-    /** Meaning. */
+    /** 
+     * Meaning. 
+     */
     private static String to;
     
-    /** Colors. */
+    /** 
+     * Colors. 
+     */
     private static final Color BLACK = Color.black;
     private static final Color WHITE = Color.white;
     private static final Color BLUE = new Color(32, 96, 200);
@@ -187,6 +211,7 @@ public class Dictionary extends JFrame {
                     text.endsWith("#4") ||
                     text.endsWith("#5") ||
                     text.endsWith("#6")) {
+			
                     result = text.split("(#\\w+#|##|#)");
                     file.set(result[1]);
                     fileName = file.choose(result[1]);
@@ -201,22 +226,28 @@ public class Dictionary extends JFrame {
 
                     sumOf.setText(String.valueOf(dictionaryService.getSize()));
                     setSearchField();
-                } else { if (text.endsWith(":1") || 
-                             text.endsWith(":2") ||
-                             text.endsWith(":3")) {
-                    result = text.split("(:\\w+:|::|:)");
-                    theme.set(result[1]);
-                    Method meth = (Method) theme.choose(result[1]);
-                    meth.invoke(this); // set theme
-                    setSearchField();
-                } else { if (text.endsWith("@1") ||
-                             text.endsWith("@2") ||
-                             text.endsWith("@3")) {
-                    result = text.split("(@\\w+@|@@|@)");
-                    font.set(result[1]);
-                    setFont((String) font.choose(result[1]));
-                    setSearchField();
-                }}}
+                } else { 
+		    if (text.endsWith(":1") || 
+		        text.endsWith(":2") ||
+		        text.endsWith(":3")) {
+			    
+			result = text.split("(:\\w+:|::|:)");
+			theme.set(result[1]);
+			Method meth = (Method) theme.choose(result[1]);
+			meth.invoke(this); // set theme
+			setSearchField();
+		    } else { 
+			if (text.endsWith("@1") ||
+			    text.endsWith("@2") ||
+		            text.endsWith("@3")) {
+
+			    result = text.split("(@\\w+@|@@|@)");
+			    font.set(result[1]);
+			    setFont((String) font.choose(result[1]));
+			    setSearchField();
+			}
+		    }
+		}
             } catch (IOException | NoSuchMethodException | 
                      IllegalArgumentException | InvocationTargetException | 
                      IllegalAccessException ex) {
@@ -449,7 +480,7 @@ public class Dictionary extends JFrame {
         copyright.setFont(new java.awt.Font("Herculanum", 1, 12)); // NOI18N
         copyright.setForeground(new java.awt.Color(32, 96, 200));
         copyright.setText("© KG");
-        copyright.setToolTipText("<html>Copyright © 2016 Gábor Kolozsy<br>\n<a href=\"http ://blank\">kolozsygabor@gmail.com</a>");
+        copyright.setToolTipText("<html>Copyright © 2016, Gábor Kolozsy<br>\n<a href=\"http ://blank\">kolozsygabor@gmail.com</a>");
 
         sumOf.setBackground(new java.awt.Color(0, 0, 0));
         sumOf.setFont(new java.awt.Font("Herculanum", 0, 12)); // NOI18N
