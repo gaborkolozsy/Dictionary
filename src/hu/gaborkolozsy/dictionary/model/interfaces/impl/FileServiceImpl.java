@@ -1,6 +1,7 @@
 /*
- * Copyright © 2016, Gábor Kolozsy. All rights reserved.
+ * Copyright © 2016, Gábor Kolozsy
  */
+
 package hu.gaborkolozsy.dictionary.model.interfaces.impl;
 
 import hu.gaborkolozsy.dictionary.model.interfaces.Service;
@@ -10,15 +11,18 @@ import java.io.IOException;
 /**
  * File service.
  * 
- * @author Kolozsy Gábor (kolozsygabor@gmail.com)
+ * @author Kolozsy Gábor (gabor.kolozsy.development@gmail.com)
  * 
- * @see hu.gaborkolozsy.dictionary.model.interfaces.Service
- * @see hu.gaborkolozsy.dictionary.model.Config
+ * @see Service
+ * @see Config
+ * @see IOException
  * @since 0.1.1
  */
 public class FileServiceImpl implements Service<String> {
     
-    /** {@code Config} object. */
+    /** 
+     * {@code Config} object. 
+     */
     private final Config config;
     
     /**
