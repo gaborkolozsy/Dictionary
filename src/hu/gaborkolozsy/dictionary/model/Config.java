@@ -1,6 +1,7 @@
 /*
- * Copyright © 2016, Gábor Kolozsy. All rights reserved.
+ * Copyright © 2016, Gábor Kolozsy
  */
+
 package hu.gaborkolozsy.dictionary.model;
 
 import java.io.FileInputStream;
@@ -11,7 +12,7 @@ import java.util.Properties;
 /**
  * Get and store properties.
  * 
- * @author Kolozsy Gábor (kolozsygabor@gmail.com)
+ * @author Kolozsy Gábor (gabor.kolozsy.development@gmail.com)
  * 
  * @see java.io.FileInputStream
  * @see java.io.FileOutputStream
@@ -21,10 +22,14 @@ import java.util.Properties;
  */
 public class Config {
     
-    /** Config file name. */
+    /** 
+     * Config file name. 
+     */
     private final String FILE = "config.ini";
     
-    /** {@code Properties} objetc. */
+    /** 
+     * {@code Properties} object. 
+     */
     private final Properties properties = new Properties();
     
     /**
