@@ -1,6 +1,7 @@
 /*
- * Copyright © 2016, Gábor Kolozsy. All rights reserved.
+ * Copyright © 2016, Gábor Kolozsy
  */
+
 package hu.gaborkolozsy.dictionary.controller;
 
 import java.util.ArrayList;
@@ -10,22 +11,28 @@ import java.util.List;
 /**
  * {@code SearchService} object.
  * 
- * @author Kolozsy Gábor (kolozsygabor@gmail.com)
+ * @author Kolozsy Gábor (gabor.kolozsy.development@gmail.com)
  * 
- * @see java.util.ArrayList
- * @see java.util.Arrays
- * @see java.util.List
+ * @see ArrayList
+ * @see Arrays
+ * @see List
  * @since 0.1.1
  */
 public class SearchService {
     
-    /** The first hit index. */
+    /** 
+     * The first hit index. 
+     */
     private int hitsFirstIdx;
     
-    /** The last hit index. */
+    /** 
+     * The last hit index. 
+     */
     private int hitsLastIdx;
     
-    /** Maximum displayed hits. */
+    /** 
+     * Maximum displayed hits. 
+     */
     private final int FIRST_TEN_DISPLAYED_HIT = 10;
 
     /**
@@ -47,6 +54,7 @@ public class SearchService {
         if (hitsLastIdx - hitsFirstIdx > FIRST_TEN_DISPLAYED_HIT) {
             hitsLastIdx = hitsFirstIdx + FIRST_TEN_DISPLAYED_HIT;
         }
+        
         List<String> hits = new ArrayList<>();
         for (int i = hitsFirstIdx; i < hitsLastIdx; i++) { 
             hits.add(keyArray[i]);
