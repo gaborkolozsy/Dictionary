@@ -54,7 +54,7 @@ import javax.swing.table.DefaultTableModel;
  * Dictionary.
  * (editing on Mac OS X and looks better on it)
  * 
- * @author Kolozsy Gábor (gabor.kolozsy.development@gmail.com)
+ * @author Gabor Kolozsy (gabor.kolozsy.development@gmail.com)
  * @version 0.1.1
  * 
  * @see DictionaryService
