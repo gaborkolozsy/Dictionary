@@ -1,6 +1,7 @@
 /*
- * Copyright © 2016, Gábor Kolozsy. All rights reserved.
+ * Copyright © 2016, Gábor Kolozsy
  */
+
 package hu.gaborkolozsy.dictionary.controller;
 
 import hu.gaborkolozsy.dictionary.model.DictionaryBox;
@@ -13,31 +14,41 @@ import java.util.Arrays;
 /**
  * Dictionary service.
  * 
- * @author Kolozsy Gábor (kolozsygabor@gmail.com)
+ * @author Kolozsy Gábor (gabor.kolozsy.development@gmail.com)
  * 
- * @see hu.gaborkolozsy.dictionary.model.DictionaryBox
- * @see java.io.BufferedReader
- * @see java.io.FileInputStream
- * @see java.io.IOException
- * @see java.io.InputStreamReader
- * @see java.util.Arrays
+ * @see DictionaryBox
+ * @see BufferedReader
+ * @see FileInputStream
+ * @see IOException
+ * @see InputStreamReader
+ * @see Arrays
  * @since 0.1.1
  */
 public class DictionaryService {
     
-    /** {@code DictionaryBox} object. */
+    /** 
+     * {@code DictionaryBox} object. 
+     */
     private final DictionaryBox dictionaryBox;
     
-    /** New line in dictionary. */
+    /** 
+     * New line in dictionary. 
+     */
     private String line;
     
-    /** First(from) read. */
+    /** 
+     * First(from) read. 
+     */
     private Boolean first;
     
-    /** Translate it. */
+    /** 
+     * Translate it. 
+     */
     private String from;
     
-    /** What's mean. */
+    /** 
+     * What's mean. 
+     */
     private String to;
 
     /**
