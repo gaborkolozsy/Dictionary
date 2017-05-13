@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package hu.gaborkolozsy.dictionary.view;
 
 import hu.gaborkolozsy.dictionary.controller.DictionaryService;
