@@ -1,4 +1,4 @@
-# Dictionary - Java based application
+# Dictionary - Java application
 
 Dark Theme | Light Theme
 :---------:|:---------:
@@ -14,11 +14,11 @@ You can search for over `70.000` words, combination of words and sentences per d
 <br>
 # Dictionaries
 
-|Dictionaries                   | Count of Words |
-|:-----------------------------:|:--------------:|
-| :gb: `English-Hungarian` HU | **169425**     |
-| HU `Hungarian-English` :gb: | **91688**      |
-| :de: `German-Hungarian`  HU | **129481**     |
-| HU `Hungarian-German`  :de: | **69995**      |
-| :gb: `English-German`    :de: | **141287**     |
-| :de: `German-English`    :gb: | **193860**     |
+|Dictionaries                  | Count of Words |
+|:----------------------------:|:--------------:|
+| :gb: `English-Hungarian` HU  | **169425**     |
+|  HU `Hungarian-English` :gb: | **91688**      |
+| :de: `German-Hungarian`  HU  | **129481**     |
+|  HU `Hungarian-German`  :de: | **69995**      |
+| :gb: `English-German`   :de: | **141287**     |
+| :de: `German-English`   :gb: | **193860**     |
