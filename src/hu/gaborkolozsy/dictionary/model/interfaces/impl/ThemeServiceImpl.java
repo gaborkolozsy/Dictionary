@@ -1,6 +1,7 @@
 /*
- * Copyright © 2016, Gábor Kolozsy. All rights reserved.
+ * Copyright © 2016, Gábor Kolozsy
  */
+
 package hu.gaborkolozsy.dictionary.model.interfaces.impl;
 
 import hu.gaborkolozsy.dictionary.model.interfaces.Service;
@@ -12,13 +13,12 @@ import java.lang.reflect.Method;
 /**
  * Theme service.
  * 
- * @author Kolozsy Gábor (kolozsygabor@gmail.com)
- * 
- * @see hu.gaborkolozsy.dictionary.model.interfaces.Service
- * @see hu.gaborkolozsy.dictionary.model.Config
- * @see hu.gaborkolozsy.dictionary.view.Dictionary
- * @see java.io.IOException
- * @see java.lang.reflect.Method
+ * @author Kolozsy Gábor (gabor.kolozsy.development@gmail.com)
+ * @see Service
+ * @see Config
+ * @see Dictionary
+ * @see IOException
+ * @see Method
  * @since 0.1.1
  */
 public class ThemeServiceImpl implements Service<Method> {
