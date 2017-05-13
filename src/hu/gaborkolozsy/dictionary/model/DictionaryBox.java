@@ -12,10 +12,9 @@ import java.util.Set;
  * DictionaryBox box.
  * 
  * @author Kolozsy Gábor (gabor.kolozsy.development@gmail.com)
- * 
- * @see java.util.HashMap
- * @see java.util.Map
- * @see java.util.Set
+ * @see HashMap
+ * @see Map
+ * @see Set
  * @since 0.1.0
  */
 public class DictionaryBox {
