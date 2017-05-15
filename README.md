@@ -7,7 +7,7 @@ Dark Theme | Light Theme
 ![Image of Dictionary](https://cloud.githubusercontent.com/assets/23102020/26023652/79d4d702-37c1-11e7-9ecf-ced7c3e97b80.png) | ![Image of Dictionary](https://cloud.githubusercontent.com/assets/23102020/26023666/bcb63156-37c1-11e7-99b4-0bca3f4f0827.png)
 <br>
 
-## Content of table
+## Table of Contents
 
 * [Screenshot](#screenshot)
 * [Description](#description)
