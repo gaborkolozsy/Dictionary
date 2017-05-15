@@ -1,5 +1,7 @@
 # Dictionary - Java application
 
+## Screenshot
+
 Dark Theme | Light Theme
 :---------:|:---------:
 ![Image of Dictionary](https://cloud.githubusercontent.com/assets/23102020/26023652/79d4d702-37c1-11e7-9ecf-ced7c3e97b80.png) | ![Image of Dictionary](https://cloud.githubusercontent.com/assets/23102020/26023666/bcb63156-37c1-11e7-99b4-0bca3f4f0827.png)
@@ -7,13 +9,13 @@ Dark Theme | Light Theme
 
 ## Content of table
 
+* [Screenshot](#screenshot)
 * [Description](#description)
 * [Construction](#construction)
-    * [Refit splash screen on Eclipse](#refit-splash-screen-on-eclipse)
 * [Dictionaries](#dictionaries)
 * [License](LICENSE.txt)
 
-# Description
+## Description
 
 This `Dictionary` is an offline dictionary. It includes all combination of the following
 3 languages:
@@ -24,22 +26,12 @@ This `Dictionary` is an offline dictionary. It includes all combination of the f
 
 You can search for over `70.000` words, combination of words and sentences per dictionary. :smile:
 
-# Construction
+## Construction
 
-The application is a simple java project and it was edited in NetBeans. So the project is a NetBeans project.
-It may open and launch in Eclipse as well. In this case the splash screen will **`not`** show automatically.
+The application is a simple java project and it was edited in NetBeans.
+So, the project is a NetBeans project.
 
-## Refit splash screen on Eclipse
-
-For fix this problem follow the next:
-
-1. Open project -> Properties
-2. Choose -> Run/Debug Settings
-3. Mark out -> Dictionary then click Edit...
-4. Choose -> Arguments
-5. In VM arguments field paste -> `-splash:resources/images/Splash.png`
-
-# Dictionaries
+## Dictionaries
 
 |Dictionaries                  | Count of Words |
 |:----------------------------:|:--------------:|
